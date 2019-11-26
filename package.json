@@ -1,5 +1,5 @@
 {
-  "name": "five-subscription",
+  "name": "reason-urql-subscriptions-demo",
   "version": "0.1.0",
   "description": "An example of how to use the Subscription component in reason-urql.",
   "main": "index.bs.js",
@@ -11,9 +11,7 @@
     "build": "bsb -make-world",
     "webpack": "webpack-dev-server --hot",
     "server": "node server/index.js",
-    "start:demo": "run-p server webpack",
-"sync-schema": "graphql get-schema && node ./generateFragmentTypes.js"
-
+    "start:demo": "run-p server webpack"
   },
   "dependencies": {
     "bs-css": "11.0.0",

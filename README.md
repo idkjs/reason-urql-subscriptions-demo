@@ -24,3 +24,5 @@ Most of the code comes from the [reason-urql examples](https://github.com/Formid
 ## Notes
 
 Of Note, when I had both components hitting the same subscription query the result would render to both components so we would have duplicate entries. I solved by creating a new subscription query but I am not sure what was going on yet. Can reproduce by rending [./src/app/MessagesHooks.re](./src/app/MessagesHooks.re) in [./src/app/App.re](./src/app/App.re).
+
+![subscriptions-screenshot](./subscriptions-screenshot.gif)
