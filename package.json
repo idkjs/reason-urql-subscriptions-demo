@@ -10,7 +10,7 @@
     "clean": "bsb -clean-world",
     "build": "bsb -make-world",
     "webpack": "webpack-dev-server --hot",
-    "server": "node src/server/index.js",
+    "server": "node server/index.js",
     "start:demo": "run-p server webpack"
   },
   "dependencies": {
