@@ -24,6 +24,6 @@ let urqlClient =
   );
 
 ReactDOMRe.renderToElementWithId(
-  <Provider value=urqlClient> <Messages /> </Provider>,
+  <Provider value=urqlClient> <App /> </Provider>,
   "root",
 );
