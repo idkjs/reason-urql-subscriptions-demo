@@ -11,7 +11,9 @@
     "build": "bsb -make-world",
     "webpack": "webpack-dev-server --hot",
     "server": "node server/index.js",
-    "start:demo": "run-p server webpack"
+    "start:demo": "run-p server webpack",
+"sync-schema": "graphql get-schema && node ./generateFragmentTypes.js"
+
   },
   "dependencies": {
     "bs-css": "11.0.0",

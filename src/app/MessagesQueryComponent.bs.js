@@ -108,11 +108,11 @@ function handler(prevSubscriptions, subscription) {
 
 var request = make(/* () */0);
 
-function mapToMessage(newMessageJs) {
-  return newMessageJs.newMessage.message;
+function mapToMessage(newNebulaJs) {
+  return newNebulaJs.newMessage.message;
 }
 
-function Messages(Props) {
+function MessagesQueryComponent(Props) {
   return React.createElement(UrqlSubscription.SubscriptionWithHandler.make, {
               request: request,
               handler: handler,
@@ -134,12 +134,12 @@ function Messages(Props) {
                               })), mapToMessage);
                     return $$Array.mapi((function (index, m) {
                                   return React.createElement("div", {
-                                              className: AppStyles.Styles.dexContainer
+                                              className: AppStyles.dexContainer
                                             }, React.createElement("div", {
                                                   key: String(index),
-                                                  className: AppStyles.Styles.dex
+                                                  className: AppStyles.dex
                                                 }, React.createElement("h1", {
-                                                      className: AppStyles.Styles.dexTitle
+                                                      className: AppStyles.dexTitle
                                                     }, m)));
                                 }), messages);
                   }
@@ -147,7 +147,7 @@ function Messages(Props) {
             });
 }
 
-var make$1 = Messages;
+var make$1 = MessagesQueryComponent;
 
 export {
   SubscribeNewMessage ,

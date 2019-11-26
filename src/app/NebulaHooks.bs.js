@@ -13,11 +13,11 @@ import * as ReasonUrql from "./reason-urql/ReasonUrql.bs.js";
 import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
 import * as HandleError from "./HandleError.bs.js";
 
-var ppx_printed_query = "subscription subscribeMessage  {\nnewMessage  {\nid  \nmessage  \n}\n\n}\n";
+var ppx_printed_query = "subscription subscribeNebula  {\nnewNebula  {\nid  \nmessage  \n}\n\n}\n";
 
 function parse(value) {
   var value$1 = Js_option.getExn(Js_json.decodeObject(value));
-  var match = Js_dict.get(value$1, "newMessage");
+  var match = Js_dict.get(value$1, "newNebula");
   var tmp;
   if (match !== undefined) {
     var value$2 = Js_option.getExn(Js_json.decodeObject(Caml_option.valFromOption(match)));
@@ -28,7 +28,7 @@ function parse(value) {
       var match$2 = Js_json.decodeString(value$3);
       tmp$1 = match$2 !== undefined ? match$2 : Js_exn.raiseError("graphql_ppx: Expected string, got " + JSON.stringify(value$3));
     } else {
-      tmp$1 = Js_exn.raiseError("graphql_ppx: Field id on type Message is missing");
+      tmp$1 = Js_exn.raiseError("graphql_ppx: Field id on type Nebula is missing");
     }
     var match$3 = Js_dict.get(value$2, "message");
     var tmp$2;
@@ -37,17 +37,17 @@ function parse(value) {
       var match$4 = Js_json.decodeString(value$4);
       tmp$2 = match$4 !== undefined ? match$4 : Js_exn.raiseError("graphql_ppx: Expected string, got " + JSON.stringify(value$4));
     } else {
-      tmp$2 = Js_exn.raiseError("graphql_ppx: Field message on type Message is missing");
+      tmp$2 = Js_exn.raiseError("graphql_ppx: Field message on type Nebula is missing");
     }
     tmp = {
       id: tmp$1,
       message: tmp$2
     };
   } else {
-    tmp = Js_exn.raiseError("graphql_ppx: Field newMessage on type Subscription is missing");
+    tmp = Js_exn.raiseError("graphql_ppx: Field newNebula on type Subscription is missing");
   }
   return {
-          newMessage: tmp
+          newNebula: tmp
         };
 }
 
@@ -87,7 +87,7 @@ function ret_type(f) {
 
 var MT_Ret = { };
 
-var SubscribeNewMessage = {
+var SubscribeNewNebula = {
   ppx_printed_query: ppx_printed_query,
   query: ppx_printed_query,
   parse: parse,
@@ -107,13 +107,11 @@ function handler(prevSubscriptions, subscription) {
   }
 }
 
-var request = make(/* () */0);
-
-function mapToMessage(newMessageJs) {
-  return newMessageJs.newMessage.message;
+function mapToMessage(newNebulaJs) {
+  return newNebulaJs.newNebula.message;
 }
 
-function MessagesHooks(Props) {
+function NebulaHooks(Props) {
   var match = Curry._2(ReasonUrql.Hooks.useSubscription, make(/* () */0), /* Handler */[handler]);
   var response = match[/* response */3];
   if (typeof response === "number") {
@@ -132,25 +130,24 @@ function MessagesHooks(Props) {
               })), mapToMessage);
     return $$Array.mapi((function (index, m) {
                   return React.createElement("div", {
-                              className: AppStyles.Styles.dexContainer
+                              className: AppStyles.dexContainer
                             }, React.createElement("div", {
                                   key: String(index),
-                                  className: AppStyles.Styles.dex
+                                  className: AppStyles.dex
                                 }, React.createElement("h1", {
-                                      className: AppStyles.Styles.dexTitle
+                                      className: AppStyles.dexTitle
                                     }, m)));
                 }), messages);
   }
 }
 
-var make$1 = MessagesHooks;
+var make$1 = NebulaHooks;
 
 export {
-  SubscribeNewMessage ,
+  SubscribeNewNebula ,
   handler ,
-  request ,
   mapToMessage ,
   make$1 as make,
   
 }
-/* request Not a pure module */
+/* react Not a pure module */

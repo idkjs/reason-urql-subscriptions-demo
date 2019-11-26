@@ -1,10 +1,11 @@
 const { PubSub } = require("graphql-subscriptions");
-const { HarryPotter } = require("fakergem");
+const { HarryPotter,Space } = require("fakergem");
 
 const pubsub = new PubSub();
 
 const store = {
   messages: [],
+  nebulas: [],
   numbers: [],
   floats: []
 };
@@ -12,15 +13,21 @@ const store = {
 const typeDefs = `
 type Query {
   messages: [Message!]!
+  nebulas: [Nebula!]!
   numbers: [Int!]!
   floats: [Float!]!
 }
 type Subscription {
   newMessage: Message!
+  newNebula: Nebula!
   newNumber: Int!
   newFloat: Float!
 }
 type Message {
+  id: ID!,
+  message: String!,
+}
+type Nebula {
   id: ID!,
   message: String!,
 }
@@ -29,12 +36,16 @@ type Message {
 const resolvers = {
   Query: {
     messages: store.messages,
+    nebulas: store.nebulas,
     numbers: store.numbers,
     floats: store.floats
   },
   Subscription: {
     newMessage: {
       subscribe: () => pubsub.asyncIterator("newMessage")
+    },
+    newNebula: {
+      subscribe: () => pubsub.asyncIterator("newNebula")
     },
     newNumber: {
       subscribe: () => pubsub.asyncIterator("newNumber")
@@ -66,6 +77,16 @@ setInterval(() => {
 
   pubsub.publish("newMessage", {
     newMessage
+  });
+}, 5000);
+setInterval(() => {
+  const newNebula = {
+    id: ++id,
+    message: Space.nebula()
+  };
+
+  pubsub.publish("newNebula", {
+    newNebula
   });
 }, 5000);
 

@@ -2,9 +2,9 @@
 
 import * as Css from "bs-css/src/Css.js";
 import * as React from "react";
-import * as Messages from "./Messages.bs.js";
 import * as AppStyles from "./AppStyles.bs.js";
-import * as MessagesHooks from "./MessagesHooks.bs.js";
+import * as NebulaHooks from "./NebulaHooks.bs.js";
+import * as MessagesQueryComponent from "./MessagesQueryComponent.bs.js";
 
 function App(Props) {
   return React.createElement("div", {
@@ -34,10 +34,10 @@ function App(Props) {
                     ]
                   ])
             }, React.createElement("div", undefined, React.createElement("h1", {
-                      className: AppStyles.Styles.dexText
-                    }, "src/Messages.Re"), React.createElement(Messages.make, { })), React.createElement("div", undefined, React.createElement("h1", {
-                      className: AppStyles.Styles.dexText
-                    }, "src/MessagesHooks.Re"), React.createElement(MessagesHooks.make, { })));
+                      className: AppStyles.dexText
+                    }, "Subscription with Component"), React.createElement(MessagesQueryComponent.make, { })), React.createElement("div", undefined, React.createElement("h1", {
+                      className: AppStyles.dexText
+                    }, "Subscription with Hooks"), React.createElement(NebulaHooks.make, { })));
 }
 
 var make = App;

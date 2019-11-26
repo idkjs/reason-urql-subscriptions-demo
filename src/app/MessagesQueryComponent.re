@@ -18,14 +18,12 @@ let handler = (prevSubscriptions, subscription) => {
   };
 };
 
-open AppStyles;
-
 let request = SubscribeNewMessage.make();
 
 /* Pull out message from response. Annotate function as Js.t('a) => string so that react.element can render or else throws error saying type is message. */
 let mapToMessage: Js.t('a) => string =
-  newMessageJs => {
-    let message = newMessageJs##newMessage##message;
+  newNebulaJs => {
+    let message = newNebulaJs##newMessage##message;
     message;
   };
 [@react.component]
@@ -42,9 +40,9 @@ let make = () => {
           ->Belt.Array.map(mapToMessage);
         messages
         |> Array.mapi((index, m) =>
-             <div className=Styles.dexContainer>
-               <div key={index->string_of_int} className=Styles.dex>
-                 <h1 className=Styles.dexTitle> m->React.string </h1>
+             <div className=AppStyles.dexContainer>
+               <div key={index->string_of_int} className=AppStyles.dex>
+                 <h1 className=AppStyles.dexTitle> m->React.string </h1>
                </div>
              </div>
            )

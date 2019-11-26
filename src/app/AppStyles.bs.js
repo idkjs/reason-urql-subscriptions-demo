@@ -177,19 +177,15 @@ var dexContainer = Css.style(/* :: */[
       ]
     ]);
 
-var Styles = {
-  container: container,
-  list: list,
-  listItem: listItem,
-  button: button,
-  dexTitle: dexTitle,
-  dexText: dexText,
-  dex: dex,
-  dexContainer: dexContainer
-};
-
 export {
-  Styles ,
+  container ,
+  list ,
+  listItem ,
+  button ,
+  dexTitle ,
+  dexText ,
+  dex ,
+  dexContainer ,
   
 }
 /* container Not a pure module */

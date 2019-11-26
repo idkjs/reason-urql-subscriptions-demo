@@ -9,15 +9,15 @@ let make = () =>
       ])
     )>
     <div>
-      <h1 className=AppStyles.Styles.dexText>
-        "src/Messages.Re"->React.string
+      <h1 className=AppStyles.dexText>
+        "Subscription with Component"->React.string
       </h1>
-      <Messages />
+      <MessagesQueryComponent />
     </div>
     <div>
-      <h1 className=AppStyles.Styles.dexText>
-        "src/MessagesHooks.Re"->React.string
+      <h1 className=AppStyles.dexText>
+        "Subscription with Hooks"->React.string
       </h1>
-      <MessagesHooks />
+      <NebulaHooks />
     </div>
   </div>;
