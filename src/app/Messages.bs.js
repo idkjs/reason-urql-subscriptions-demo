@@ -8,15 +8,9 @@ import * as Js_dict from "bs-platform/lib/es6/js_dict.js";
 import * as Js_json from "bs-platform/lib/es6/js_json.js";
 import * as Js_option from "bs-platform/lib/es6/js_option.js";
 import * as Belt_Array from "bs-platform/lib/es6/belt_Array.js";
-import * as Belt_Option from "bs-platform/lib/es6/belt_Option.js";
 import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
+import * as HandleError from "./HandleError.bs.js";
 import * as UrqlSubscription from "./reason-urql/components/UrqlSubscription.bs.js";
-
-function jsonify(data) {
-  return React.createElement("div", undefined, React.createElement("h4", {
-                  className: "card-title"
-                }, "Raw Response"), React.createElement("pre", undefined, JSON.stringify(data, null, 2)));
-}
 
 var ppx_printed_query = "subscription subscribeMessage  {\nnewMessage  {\nid  \nmessage  \n}\n\n}\n";
 
@@ -203,33 +197,78 @@ var dexTitle = Css.style(/* :: */[
       ]
     ]);
 
+var dex = Css.style(/* :: */[
+      Css.display(Css.flexBox),
+      /* :: */[
+        Css.flexDirection(Css.column),
+        /* :: */[
+          Css.width(Css.pct(100)),
+          /* :: */[
+            Css.borderRadius(Css.pct(5)),
+            /* :: */[
+              Css.background(Css.linearGradient(Css.deg(45), /* :: */[
+                        /* tuple */[
+                          Css.zero,
+                          Css.hex("F29441")
+                        ],
+                        /* :: */[
+                          /* tuple */[
+                            Css.pct(100),
+                            Css.hex("A04AD9")
+                          ],
+                          /* [] */0
+                        ]
+                      ])),
+              /* :: */[
+                Css.border(Css.px(2), Css.solid, Css.hsl(Css.deg(210), 23, 95)),
+                /* :: */[
+                  Css.overflow(Css.hidden),
+                  /* :: */[
+                    Css.alignItems(Css.center),
+                    /* :: */[
+                      Css.boxShadow(Css.Shadow.box(Css.px(0), Css.px(0), Css.px(6), undefined, undefined, Css.hsl(Css.deg(0), 0, 80))),
+                      /* [] */0
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]);
+
+var dexContainer = Css.style(/* :: */[
+      Css.display(Css.flexBox),
+      /* :: */[
+        Css.alignItems(Css.flexStart),
+        /* :: */[
+          Css.justifyContent(Css.center),
+          /* :: */[
+            Css.margin(Css.auto),
+            /* :: */[
+              Css.width(Css.rem(25)),
+              /* [] */0
+            ]
+          ]
+        ]
+      ]
+    ]);
+
 var Styles = {
   container: container,
   list: list,
   listItem: listItem,
   button: button,
-  dexTitle: dexTitle
+  dexTitle: dexTitle,
+  dex: dex,
+  dexContainer: dexContainer
 };
-
-function flattenPokemon(pokemons) {
-  return $$Array.map((function (newMessage) {
-                if (newMessage !== undefined) {
-                  return Belt_Option.getWithDefault(Caml_option.valFromOption(newMessage).message, "");
-                } else {
-                  return "";
-                }
-              }), pokemons);
-}
 
 var request = make(/* () */0);
 
-function mapToSchemaState(newMessageJs) {
-  var id = newMessageJs.newMessage.id;
-  var message = newMessageJs.newMessage.message;
-  return /* record */[/* newMessage : record */[
-            /* id */id,
-            /* message */message
-          ]];
+function mapToMessage(newMessageJs) {
+  return newMessageJs.newMessage.message;
 }
 
 function Messages(Props) {
@@ -245,27 +284,23 @@ function Messages(Props) {
                       return React.createElement("text", undefined, "Not Found");
                     }
                   } else if (response.tag) {
-                    return React.createElement("text", undefined, "Error");
+                    return React.createElement(HandleError.make, {
+                                e: response[0]
+                              });
                   } else {
-                    var data = response[0];
-                    var newMessagesRaw = Belt_Array.keepMap(data, (function (item) {
-                            return Caml_option.some(item);
-                          }));
-                    var decoded = Belt_Array.map(newMessagesRaw, mapToSchemaState);
-                    console.log("Array.map_decoded", decoded);
-                    console.log("Array.map(newMessage", $$Array.map((function (newMessage) {
-                                return newMessage;
-                              }), newMessagesRaw));
-                    Belt_Array.keepMap(data, (function (item) {
-                            return Caml_option.some(item);
-                          }));
+                    var messages = Belt_Array.map(Belt_Array.keepMap(response[0], (function (item) {
+                                return Caml_option.some(item);
+                              })), mapToMessage);
                     return $$Array.mapi((function (index, m) {
                                   return React.createElement("div", {
-                                              className: container
-                                            }, React.createElement("h1", {
-                                                  className: dexTitle
-                                                }, jsonify(m)));
-                                }), decoded);
+                                              className: dexContainer
+                                            }, React.createElement("div", {
+                                                  key: String(index),
+                                                  className: dex
+                                                }, React.createElement("h1", {
+                                                      className: dexTitle
+                                                    }, m)));
+                                }), messages);
                   }
                 })
             });
@@ -274,13 +309,11 @@ function Messages(Props) {
 var make$1 = Messages;
 
 export {
-  jsonify ,
   SubscribeNewMessage ,
   handler ,
   Styles ,
-  flattenPokemon ,
   request ,
-  mapToSchemaState ,
+  mapToMessage ,
   make$1 as make,
   
 }
