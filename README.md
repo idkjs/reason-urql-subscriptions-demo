@@ -10,6 +10,8 @@ $ cd server && yarn install
 $ cd node_modules/reason-urql && yarn install && yarn build
 ```
 
+For whatever reason, installing with `pnpm` causes problems.
+
 App will be on `http://localhost:4000/`.
 Graphiql will be on `http://localhost:4000/graphql`.
 

@@ -6,7 +6,7 @@ import * as $$Array from "bs-platform/lib/es6/array.js";
 import * as Curry from "bs-platform/lib/es6/curry.js";
 import * as React from "react";
 import * as ReactDOMRe from "reason-react/src/ReactDOMRe.js";
-import * as ReasonUrql from "./reason-urql/ReasonUrql.bs.js";
+import * as ReasonUrql from "reason-urql/src/ReasonUrql.bs.js";
 import * as SubscriptionsTransportWs from "subscriptions-transport-ws";
 
 var client = new SubscriptionsTransportWs.SubscriptionClient("ws://localhost:4001/graphql", { });
@@ -21,7 +21,7 @@ var subscriptionExchangeOpts = {
 
 var subscriptionExchange = Urql.subscriptionExchange(subscriptionExchangeOpts);
 
-var urqlClient = Curry._5(ReasonUrql.Client.make, "http://localhost:4000/graphql", undefined, $$Array.append(Urql.defaultExchanges, /* array */[subscriptionExchange]), undefined, /* () */0);
+var urqlClient = Curry._6(ReasonUrql.Client.make, "http://localhost:4000/graphql", undefined, $$Array.append(Urql.defaultExchanges, /* array */[subscriptionExchange]), undefined, undefined, /* () */0);
 
 ReactDOMRe.renderToElementWithId(React.createElement(Urql.Provider, {
           value: urqlClient,

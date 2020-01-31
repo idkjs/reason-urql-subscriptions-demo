@@ -10,7 +10,7 @@ import * as Js_option from "bs-platform/lib/es6/js_option.js";
 import * as Belt_Array from "bs-platform/lib/es6/belt_Array.js";
 import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
 import * as HandleError from "./HandleError.bs.js";
-import * as UrqlSubscription from "./reason-urql/components/UrqlSubscription.bs.js";
+import * as UrqlSubscription from "reason-urql/src/components/UrqlSubscription.bs.js";
 
 var ppx_printed_query = "subscription subscribeMessage  {\nnewMessage  {\nid  \nmessage  \n}\n\n}\n";
 
@@ -117,7 +117,7 @@ function MessagesQueryComponent(Props) {
               request: request,
               handler: handler,
               children: (function (param) {
-                  var response = param[/* response */3];
+                  var response = param.response;
                   if (typeof response === "number") {
                     if (response === /* Fetching */0) {
                       return React.createElement("text", undefined, "Loading");

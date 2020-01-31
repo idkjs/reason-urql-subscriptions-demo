@@ -9,11 +9,11 @@ import * as Caml_option from "bs-platform/lib/es6/caml_option.js";
 
 function HandleError(Props) {
   var e = Props.e;
-  var match = e[/* networkError */0];
+  var match = e.networkError;
   if (match !== undefined) {
     return React.createElement("div", undefined, Belt_Option.getWithDefault(Caml_option.valFromOption(match).message, "Network error"));
   } else {
-    var match$1 = e[/* graphQLErrors */1];
+    var match$1 = e.graphQLErrors;
     if (match$1 !== undefined) {
       return React.createElement("div", undefined, $$String.concat(", ", List.map((function (e) {
                             var msg = Belt_Option.getWithDefault(Caml_option.nullable_to_opt(e.message), "GraphQL error");

@@ -32,6 +32,7 @@ let make = () => {
     useSubscription(
       ~request=SubscribeNewMessage.make(),
       ~handler=Handler(handler),
+      (),
     );
   switch (response) {
   | Fetching => <text> "Loading"->React.string </text>

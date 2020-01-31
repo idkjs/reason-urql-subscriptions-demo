@@ -32,6 +32,7 @@ let make = () => {
     useSubscription(
       ~request=SubscribeNewNebula.make(),
       ~handler=Handler(handler),
+      (),
     );
   switch (response) {
   | Fetching => <text> "Loading"->React.string </text>
