@@ -8,7 +8,7 @@
   ],
   "sources": [
     {
-      "dir": "src/app",
+      "dir": "src",
       "subdirs": true
     }
   ],
@@ -22,6 +22,7 @@
   "bs-dependencies": [
     "wonka",
     "reason-react",
+    "reason-urql",
     "bs-css",
     "bs-fetch"
   ],
